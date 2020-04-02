@@ -1,0 +1,30 @@
+public class HappyNumber {
+    public static void main(String[] args) {
+        try {
+            System.out.println(isHappy(22));
+        } catch(StackOverflowError error) {
+            System.out.println(false);
+        }
+    }
+    
+    public static boolean isHappy(int n) {
+       if(n == 1 || n == 7) {
+           return true;
+       }
+       if(n < 10) {
+           return false;
+       }
+       int sum = 0;
+       while(n != 0) {
+           int r = n % 10;
+           sum += (r * r);
+           n /= 10;
+       }
+       if(sum == 1) {
+           return true;
+       } else {
+           //System.out.println(sum);
+         return isHappy(sum);  
+       }
+    }
+}
