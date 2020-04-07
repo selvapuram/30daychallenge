@@ -1,0 +1,36 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        
+        if(strs == null || strs.length == 0) {
+            return new ArrayList<List<String>>();
+        }
+        Map<String, List<String>> lookupMap = new HashMap<>();
+        
+        for(String s : strs){
+            String hashkey = getUniqueKeyforString(s);
+            
+            if(!lookupMap.containsKey(hashkey)) {
+                lookupMap.put(hashkey, new ArrayList<String>());
+            }
+            lookupMap.get(hashkey).add(s);
+        }
+        
+        return new ArrayList<List<String>>(lookupMap.values());
+        
+    }
+    
+    private static String getUniqueKeyforString(String s) {
+        int d[] = new int[26];
+        for(char c : s.toCharArray()) {
+            int index = (int)c - 97;
+            d[index] = d[index] + 1;
+        }
+        StringBuilder toRet = new StringBuilder();
+        for(int i = 0; i < 26; i++) {
+            if(d[i] != 0) {
+                toRet.append(i).append("_").append(d[i]);   
+            }
+        }
+        return toRet.toString();
+    }
+}
