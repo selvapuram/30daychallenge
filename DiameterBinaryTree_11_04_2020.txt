@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    static class HeightUtil 
+    { 
+        int h = Integer.MIN_VALUE; 
+    };
+    public int diameterOfBinaryTree(TreeNode root) {
+        return diameter(root);
+    }
+    
+    /* Function to find height of a tree */
+    private static int height(TreeNode root, HeightUtil a)  
+    {  
+        if (root == null)  
+            return 0;  
+
+        int left_height = height(root.left, a);  
+
+        int right_height = height(root.right, a);  
+
+        // update the answer, because diameter of a  
+        // tree is nothing but maximum value of  
+        // (left_height + right_height + 1) for each node  
+        a.h = Math.max(a.h, left_height + 
+                        right_height);  
+
+        return 1 + Math.max(left_height, right_height);  
+    }
+    private static int diameter(TreeNode root)  
+    {  
+        if (root == null)  
+            return 0;  
+
+        // This will store the final answer 
+        HeightUtil a = new HeightUtil(); 
+        int height_of_tree = height(root, a);  
+        return a.h;  
+    }
+    
+    
+}
