@@ -1,0 +1,28 @@
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        
+        int[] finalShift = new int[2];
+        int end = s.length();
+        for(int i = 0; i < shift.length; i++) {
+            finalShift[shift[i][0]] += shift[i][1];
+        }
+        
+        StringBuilder res = new StringBuilder();
+        int t = finalShift[0] - finalShift[1];
+        t = t % end;
+        // System.out.println(finalShift[0] + "," + finalShift[1]);
+        
+        if(t == 0) {
+            return s;
+        }
+        int begin = 0;
+        
+        if(t < 0) {
+            begin = end + t;
+        } else if(t > 0) {
+            begin = t;
+        }
+        res.append(s, begin, end).append(s, 0, begin);
+        return res.toString();
+    }
+}
