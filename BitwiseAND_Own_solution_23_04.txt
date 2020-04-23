@@ -1,0 +1,20 @@
+class Solution {
+    public int rangeBitwiseAnd(int m, int n) {
+        int j = m;
+        if(j == 0)
+            return 0;
+        int range = n - m;
+        if(range == 1) {
+            return (m & n);
+        }
+        if(range == 0) {
+            return m;
+        }
+        for(int i = m+1; i <= n; i++) {
+            j = (j & i);
+            if(j == 0)
+                return 0;
+        }
+        return j;
+    }
+}
